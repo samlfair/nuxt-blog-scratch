@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <h1>Sam's Cool Blog</h1>
-    <p class="subtitle">A description of Sam's cool blog.</p>
+    <h1>{{ $prismic.asText(homepageContent.headline) }}</h1>
+    <p class="subtitle">{{ $prismic.asText(homepageContent.description) }}</p>
+    <hr />
+    <div v-for="post in blogPosts" v-bind:key="post.id">
+      {{ $prismic.asText(post.data.title) }}
+      <hr />
+    </div>
   </div>
 </template>
 
@@ -16,9 +21,16 @@ export default {
   async asyncData({ $prismic, error }) {
     try {
       const homepageContent = (await $prismic.api.getSingle("blog_home")).data;
-      console.log(homepageContent);
+      const blogPosts = (
+        await $prismic.api.query(
+          $prismic.predicates.at("document.type", "post"),
+          { orderings: "[my.post.date desc]" }
+        )
+      ).results;
+      console.log(blogPosts);
+      return { homepageContent, blogPosts };
     } catch (e) {
-      error({ statsCode: 404, message: "Page note found" });
+      error({ statsCode: 404, message: "Page not found" });
     }
   }
 };
