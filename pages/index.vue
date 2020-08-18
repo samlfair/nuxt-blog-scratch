@@ -1,19 +1,17 @@
 <template>
   <div class="container">
-    <h1>{{ $prismic.asText(homepageContent.headline) }}</h1>
-    <p class="subtitle">{{ $prismic.asText(homepageContent.description) }}</p>
-    <hr />
+    <Nav :content="navContent" />
     <div v-for="post in blogPosts" v-bind:key="post.id">
-      <nuxt-link :to="post.link">
-        {{ $prismic.asText(post.data.title) }}
-      </nuxt-link>
       <hr />
+      <Thumbnail :post="post"></Thumbnail>
     </div>
   </div>
 </template>
 
 <script>
 import LinkResolver from "~/plugins/link-resolver.js";
+import Nav from "../components/Nav";
+import Thumbnail from "../components/Thumbnail";
 
 export default {
   name: "Home",
@@ -22,9 +20,13 @@ export default {
       title: "Homepage"
     };
   },
+  components: {
+    Nav,
+    Thumbnail
+  },
   async asyncData({ $prismic, error }) {
     try {
-      const homepageContent = (await $prismic.api.getSingle("blog_home")).data;
+      const navContent = (await $prismic.api.getSingle("nav")).data;
       const blogPosts = (
         await $prismic.api.query(
           $prismic.predicates.at("document.type", "post"),
@@ -32,7 +34,7 @@ export default {
         )
       ).results;
       blogPosts.forEach(post => (post.link = LinkResolver(post)));
-      return { homepageContent, blogPosts };
+      return { blogPosts, navContent };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
     }
@@ -54,5 +56,9 @@ h2 {
 p.subtitle {
   font-size: 1.2em;
   margin-top: 10px;
+}
+
+hr {
+  border-top: 1px solid #eeeeee;
 }
 </style>

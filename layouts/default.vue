@@ -2,12 +2,22 @@
   <div class="layout">
     <div class="col-left"></div>
     <div class="col-middle">
-      <nav class="nav"></nav>
+      <!-- <Nav /> -->
       <Nuxt />
     </div>
     <div class="col-right"></div>
   </div>
 </template>
+
+<script>
+// import Nav from "../components/Nav";
+
+// export default {
+//   components: {
+//     Nav
+//   }
+// };
+</script>
 
 <style scoped lang="scss">
 .layout {
@@ -27,11 +37,5 @@
   .col-right {
     flex: 5 1 20px;
   }
-}
-
-nav {
-  width: 100%;
-  height: 2em;
-  background: pink;
 }
 </style>
