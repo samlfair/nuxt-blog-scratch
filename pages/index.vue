@@ -2,7 +2,6 @@
   <div class="container">
     <Nav :content="navContent" />
     <div v-for="post in blogPosts" v-bind:key="post.id">
-      <hr />
       <Thumbnail :post="post"></Thumbnail>
     </div>
   </div>

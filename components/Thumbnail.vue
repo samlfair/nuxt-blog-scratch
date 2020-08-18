@@ -6,11 +6,9 @@
           {{ $prismic.asText(post.data.title) }}
         </h2>
       </nuxt-link>
-      <prismic-rich-text :field="description" />
-      <!-- {{ $prismic.richText(description) }} -->
-      <!-- {{ description }} -->
+      {{ $prismic.asText(description) }}
+      <!-- <prismic-rich-text class="description" :field="description" /> -->
     </div>
-    <hr />
   </article>
 </template>
 
@@ -26,11 +24,11 @@ export default {
     description: function() {
       let desc;
       this.post.data.body.forEach(slice => {
-        console.log("Slice!");
         if (slice.slice_type === "text") desc = slice.primary.text;
       });
-      if (desc[0].text.length > 300) {
-        desc[0].text = desc[0].text.slice(0, 300) + "...";
+      if (desc[0].text.length > 200) {
+        const regex = /^(\S+\s){20}\S+/;
+        desc[0].text = desc[0].text.match(regex)[0] + "...";
       }
       return desc;
     }
@@ -40,6 +38,9 @@ export default {
 
 <style lang="scss" scoped>
 .thumbnail {
+  &:first-child {
+    border-top: 1px solid #eee;
+  }
   &__data {
     padding: 20px 0;
     h2 {
@@ -47,11 +48,11 @@ export default {
       font-weight: bold;
       margin-bottom: 10px;
     }
+    .description {
+      font-size: 1.1em;
+      line-height: 1.4em;
+    }
   }
-}
-
-hr {
-  border-color: #eee;
-  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eee;
 }
 </style>
