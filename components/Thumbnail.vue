@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 .thumbnail {
   &:first-child {
-    border-top: 1px solid #eee;
+    // border-top: 1px solid #eee;
   }
   &__data {
     padding: 20px 0;

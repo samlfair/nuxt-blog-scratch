@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Nav :content="navContent" />
-    <div v-for="post in blogPosts" v-bind:key="post.id">
+    <div v-for="post in blogPosts" v-bind:key="post.id" class="postlist">
       <Thumbnail :post="post"></Thumbnail>
     </div>
   </div>
@@ -57,7 +57,7 @@ p.subtitle {
   margin-top: 10px;
 }
 
-hr {
-  border-top: 1px solid #eeeeee;
+.postlist {
+  border-top: 1px solid #eee;
 }
 </style>
