@@ -1,22 +1,37 @@
 <template>
   <div class="layout">
-    <Nuxt />
+    <div class="col-left"></div>
+    <div class="col-middle">
+      <nav class="nav"></nav>
+      <Nuxt />
+    </div>
+    <div class="col-right"></div>
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .layout {
-  max-width: 700px;
-  margin: auto;
-  padding: 10vw 10px;
+  width: 100vw;
+  height: calc(100vh - 2em);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  > .container {
-    align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  .col-left {
+    flex: 3 1 20px;
+    max-width: 200px;
   }
-  > .wide {
-    width: 100vw;
+  .col-middle {
+    flex: 2 1 400px;
+    max-width: 700px;
   }
+  .col-right {
+    flex: 5 1 20px;
+  }
+}
+
+nav {
+  width: 100%;
+  height: 2em;
+  background: pink;
 }
 </style>

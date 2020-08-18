@@ -4,13 +4,17 @@
     <p class="subtitle">{{ $prismic.asText(homepageContent.description) }}</p>
     <hr />
     <div v-for="post in blogPosts" v-bind:key="post.id">
-      {{ $prismic.asText(post.data.title) }}
+      <nuxt-link :to="post.link">
+        {{ $prismic.asText(post.data.title) }}
+      </nuxt-link>
       <hr />
     </div>
   </div>
 </template>
 
 <script>
+import LinkResolver from "~/plugins/link-resolver.js";
+
 export default {
   name: "Home",
   head() {
@@ -27,7 +31,7 @@ export default {
           { orderings: "[my.post.date desc]" }
         )
       ).results;
-      console.log(blogPosts);
+      blogPosts.forEach(post => (post.link = LinkResolver(post)));
       return { homepageContent, blogPosts };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
