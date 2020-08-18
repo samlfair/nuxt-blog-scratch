@@ -8,7 +8,7 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: "server",
+  target: "static",
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -56,8 +56,8 @@ export default {
    */
   modules: [
     // modules for full static before `nuxt export` (coming in v2.12)
-    "@/modules/static",
-    "@/modules/crawler",
+    // "@/modules/static",
+    // "@/modules/crawler",
     // https://prismic-nuxt.js.org/
     "@nuxtjs/prismic"
   ],
@@ -70,5 +70,12 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {}
+  build: {
+    extend(config, ctx) {
+      config.resolve.alias["vue"] = "vue/dist/vue.common";
+    }
+  },
+  generate: {
+    fallback: "404.html" // Netlify reads a 404.html, Nuxt will load as an SPA
+  }
 };
