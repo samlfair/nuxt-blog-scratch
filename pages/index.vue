@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <Nav :content="navContent" />
-    <div v-for="post in blogPosts" v-bind:key="post.id" class="postlist">
-      <Thumbnail :post="post"></Thumbnail>
+    <div class="postlist">
+      <div v-for="post in blogPosts" v-bind:key="post.id">
+        <Thumbnail :post="post"></Thumbnail>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import LinkResolver from "~/plugins/link-resolver.js";
-import Nav from "../components/Nav";
-import Thumbnail from "../components/Thumbnail";
+import Thumbnail from "~/components/Thumbnail";
 
 export default {
   name: "Home",
@@ -20,12 +20,10 @@ export default {
     };
   },
   components: {
-    Nav,
     Thumbnail
   },
   async asyncData({ $prismic, error }) {
     try {
-      const navContent = (await $prismic.api.getSingle("nav")).data;
       const blogPosts = (
         await $prismic.api.query(
           $prismic.predicates.at("document.type", "post"),
@@ -33,7 +31,7 @@ export default {
         )
       ).results;
       blogPosts.forEach(post => (post.link = LinkResolver(post)));
-      return { blogPosts, navContent };
+      return { blogPosts };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
     }

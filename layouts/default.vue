@@ -2,7 +2,7 @@
   <div class="layout">
     <div class="col-left"></div>
     <div class="col-middle">
-      <!-- <Nav /> -->
+      <Nav />
       <Nuxt />
     </div>
     <div class="col-right"></div>
@@ -10,13 +10,14 @@
 </template>
 
 <script>
-// import Nav from "../components/Nav";
+import Nav from "~/components/Nav";
 
-// export default {
-//   components: {
-//     Nav
-//   }
-// };
+export default {
+  name: "default",
+  components: {
+    Nav
+  }
+};
 </script>
 
 <style scoped lang="scss">
