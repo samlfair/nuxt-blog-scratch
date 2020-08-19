@@ -16,7 +16,72 @@ export default {
   name: "Home",
   head() {
     return {
-      title: "Sam Littlefair"
+      title: "Sam Littlefair",
+      meta: [
+        {
+          property: "description",
+          content: "Personal website of Sam Littlefair."
+        },
+        {
+          property: "og:description",
+          content: "Personal website of Sam Littlefair."
+        },
+        {
+          property: "og:image",
+          content:
+            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+        },
+        {
+          property: "og:image:alt",
+          content: "A purple and red prism"
+        },
+        {
+          property: "og:url",
+          content: process.env.baseUrl + this.$route.path
+        },
+        {
+          property: "og:site_name",
+          content: "Sam Littlefair"
+        },
+        {
+          name: "twitter:creator",
+          content: "@samlfair"
+        },
+        {
+          name: "twitter:url",
+          content: process.env.baseUrl + this.$route.path
+        },
+        {
+          name: "twitter:title",
+          content: "Sam Littlefair"
+        },
+        {
+          name: "twitter:image",
+          content:
+            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+        },
+        {
+          name: "twitter:image:alt",
+          content: "A purple and red prism"
+        },
+        {
+          name: "twitter:dnt",
+          content: "off"
+        },
+        {
+          itemprop: "name",
+          content: "Sam Littlefair"
+        },
+        {
+          itemprop: "description",
+          content: "Personal website of Sam Littlefair"
+        },
+        {
+          itemprop: "image",
+          content:
+            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+        }
+      ]
     };
   },
   components: {

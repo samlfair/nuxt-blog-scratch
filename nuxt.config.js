@@ -14,7 +14,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: "Sam's Amazing Blog",
+    title: "Sam",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -77,5 +77,8 @@ export default {
   },
   generate: {
     fallback: "404.html" // Netlify reads a 404.html, Nuxt will load as an SPA
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || "http://localhost:3000"
   }
 };
