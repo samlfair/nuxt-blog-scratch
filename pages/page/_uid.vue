@@ -30,9 +30,41 @@ export default {
     }
   },
   head() {
-    return {
-      title: this.$prismic.asText(this.pageContent.title) + " - Sam Littlefair",
-      meta: [
+    const meta = [
+      {
+        property: "og:url",
+        content: process.env.baseUrl + this.$route.path
+      },
+      {
+        itemprop: "name",
+        content:
+          (this.pageContent.meta_title[0].text ||
+            this.pageContent.title[0].text) + " - Sam Littlefair"
+      },
+      {
+        property: "og:site_name",
+        content: "Sam Littlefair"
+      },
+      {
+        name: "twitter:creator",
+        content: "@samlfair"
+      },
+      {
+        name: "twitter:url",
+        content: process.env.baseUrl + this.$route.path
+      },
+      {
+        name: "twitter:title",
+        content:
+          this.pageContent.meta_title[0].text || this.pageContent.title[0].text
+      },
+      {
+        name: "twitter:dnt",
+        content: "off"
+      }
+    ];
+    if (this.pageContent.meta_description[0].text) {
+      meta.push(
         {
           property: "description",
           content: this.pageContent.meta_description[0].text
@@ -42,32 +74,16 @@ export default {
           content: this.pageContent.meta_description[0].text
         },
         {
+          itemprop: "description",
+          content: this.pageContent.meta_description[0].text
+        }
+      );
+    }
+    if (this.pageContent.meta_image.url) {
+      meta.push(
+        {
           property: "og:image",
           content: this.pageContent.meta_image.url
-        },
-        {
-          property: "og:image:alt",
-          content: this.pageContent.meta_image.alt
-        },
-        {
-          property: "og:url",
-          content: process.env.baseUrl + this.$route.path
-        },
-        {
-          property: "og:site_name",
-          content: "Sam Littlefair"
-        },
-        {
-          name: "twitter:creator",
-          content: "@samlfair"
-        },
-        {
-          name: "twitter:url",
-          content: process.env.baseUrl + this.$route.path
-        },
-        {
-          name: "twitter:title",
-          content: this.pageContent.meta_title[0].text
         },
         {
           name: "twitter:image",
@@ -78,22 +94,18 @@ export default {
           content: this.pageContent.meta_image.url
         },
         {
-          name: "twitter:dnt",
-          content: "off"
-        },
-        {
-          itemprop: "name",
-          content: this.pageContent.meta_title[0].text
-        },
-        {
-          itemprop: "description",
-          content: this.pageContent.meta_description[0].text
+          property: "og:image:alt",
+          content: this.pageContent.meta_image.alt
         },
         {
           itemprop: "image",
           content: this.pageContent.meta_image.url
         }
-      ]
+      );
+    }
+    return {
+      title: this.$prismic.asText(this.pageContent.title) + " - Sam Littlefair",
+      meta
     };
   }
 };
