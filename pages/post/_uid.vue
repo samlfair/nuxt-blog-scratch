@@ -53,6 +53,12 @@ export default {
             this.$prismic.asText(this.postContent.title)) + " - Sam Littlefair"
       },
       {
+        property: "og:title",
+        content:
+          (this.postContent.meta_title[0].text ||
+            this.$prismic.asText(this.postContent.title)) + " - Sam Littlefair"
+      },
+      {
         name: "twitter:dnt",
         content: "off"
       },

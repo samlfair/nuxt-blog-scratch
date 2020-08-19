@@ -59,6 +59,11 @@ export default {
           this.pageContent.meta_title[0].text || this.pageContent.title[0].text
       },
       {
+        property: "og:title",
+        content:
+          this.pageContent.meta_title[0].text || this.pageContent.title[0].text
+      },
+      {
         name: "twitter:dnt",
         content: "off"
       }
