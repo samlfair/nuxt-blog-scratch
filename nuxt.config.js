@@ -79,6 +79,6 @@ export default {
     fallback: "404.html" // Netlify reads a 404.html, Nuxt will load as an SPA
   },
   env: {
-    baseUrl: process.env.BASE_URL || "http://localhost:3000"
+    baseUrl: "samlfair.github.io"
   }
 };
