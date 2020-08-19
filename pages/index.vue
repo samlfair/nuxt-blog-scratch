@@ -16,24 +16,23 @@ export default {
   name: "Home",
   head() {
     return {
-      title: "Sam Littlefair",
+      title: this.homeContent.meta_title[0].text,
       meta: [
         {
           property: "description",
-          content: "Personal website of Sam Littlefair."
+          content: this.homeContent.meta_description[0].text
         },
         {
           property: "og:description",
-          content: "Personal website of Sam Littlefair."
+          content: this.homeContent.meta_description[0].text
         },
         {
           property: "og:image",
-          content:
-            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+          content: this.homeContent.meta_image.url
         },
         {
           property: "og:image:alt",
-          content: "A purple and red prism"
+          content: this.homeContent.meta_image.alt
         },
         {
           property: "og:url",
@@ -53,16 +52,15 @@ export default {
         },
         {
           name: "twitter:title",
-          content: "Sam Littlefair"
+          content: this.homeContent.meta_title[0].text
         },
         {
           name: "twitter:image",
-          content:
-            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+          content: this.homeContent.meta_image.url
         },
         {
           name: "twitter:image:alt",
-          content: "A purple and red prism"
+          content: this.homeContent.meta_image.url
         },
         {
           name: "twitter:dnt",
@@ -70,16 +68,15 @@ export default {
         },
         {
           itemprop: "name",
-          content: "Sam Littlefair"
+          content: this.homeContent.meta_title[0].text
         },
         {
           itemprop: "description",
-          content: "Personal website of Sam Littlefair"
+          content: this.homeContent.meta_description[0].text
         },
         {
           itemprop: "image",
-          content:
-            "https://images.prismic.io/sam-onboarding-nuxt-blog/fb3df6eb-f038-4d3a-a3fc-322bbee0dbaa_michael-dziedzic-W6l35A_rxxU-unsplash.jpg?auto=compress,format"
+          content: this.homeContent.meta_image.url
         }
       ]
     };
@@ -96,7 +93,8 @@ export default {
         )
       ).results;
       blogPosts.forEach(post => (post.link = LinkResolver(post)));
-      return { blogPosts };
+      const homeContent = (await $prismic.api.getByUID("page", "home")).data;
+      return { blogPosts, homeContent };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
     }
