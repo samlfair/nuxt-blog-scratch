@@ -10,6 +10,9 @@
       <div v-if="slice.slice_type === 'image_with_caption'">
         <ImageWithCaption :slice="slice" />
       </div>
+      <div v-if="slice.slice_type === 'embed'">
+        <Embed :slice="slice" />
+      </div>
     </div>
   </div>
 </template>
@@ -18,13 +21,15 @@
 import RichText from "./Slices/RichText";
 import Quote from "./Slices/Quote";
 import ImageWithCaption from "./Slices/ImageWithCaption";
+import Embed from "./Slices/Embed";
 
 export default {
   name: "SliceZone",
   components: {
     RichText,
     Quote,
-    ImageWithCaption
+    ImageWithCaption,
+    Embed
   },
   props: {
     SliceZone: Array

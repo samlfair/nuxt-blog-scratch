@@ -7,7 +7,9 @@
     </nuxt-link>
     <ul class="menu">
       <li v-for="link in nav.links" v-bind:key="link.label">
-        <nuxt-link :to="link.href">{{ $prismic.asText(link.label) }}</nuxt-link>
+        <nuxt-link :class="link.label" :to="link.href">{{
+          $prismic.asText(link.label)
+        }}</nuxt-link>
       </li>
     </ul>
   </nav>
@@ -40,7 +42,7 @@ ul.menu {
   list-style: none;
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 20px;
   color: lightgrey;
   li {
     margin-right: 20px;
@@ -52,14 +54,18 @@ ul.menu {
   }
 }
 
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 h1 {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 600;
-}
-
-h2 {
-  font-family: "Lora", serif;
-  font-weight: 400;
 }
 
 p.subtitle {
