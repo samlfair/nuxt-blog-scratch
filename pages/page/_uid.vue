@@ -1,10 +1,11 @@
 <template>
-  <div class="post">
+  <div class="page">
     <h2>
-      {{ $prismic.asText(postContent.title) }}
+      {{ $prismic.asText(pageContent.title) }}
     </h2>
     <div class="post__content">
-      <SliceZone :SliceZone="postContent.body" />
+      <!-- <prismic-rich-text :field="pageContent.text" /> -->
+      <SliceZone :SliceZone="pageContent.body" />
     </div>
   </div>
 </template>
@@ -14,30 +15,30 @@ import Nav from "~/components/Nav";
 import SliceZone from "~/components/SliceZone";
 
 export default {
-  name: "post",
+  name: "page",
   components: {
     Nav,
     SliceZone
   },
   async asyncData({ $prismic, params, error }) {
     try {
-      const postContent = (await $prismic.api.getByUID("post", params.uid))
+      const pageContent = (await $prismic.api.getByUID("page", params.uid))
         .data;
-      return { postContent };
+      return { pageContent };
     } catch (e) {
       error({ statsCode: 404, message: e });
     }
   },
   head() {
     return {
-      title: this.$prismic.asText(this.postContent.title) + " - Sam Littlefair"
+      title: this.$prismic.asText(this.pageContent.title) + " - Sam Littlefair"
     };
   }
 };
 </script>
 
 <style scoped lang="scss">
-.post {
+.page {
   h2 {
     font-size: 2.2em;
     line-height: 2em;

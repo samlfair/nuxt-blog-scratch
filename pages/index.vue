@@ -16,7 +16,7 @@ export default {
   name: "Home",
   head() {
     return {
-      title: "Homepage"
+      title: "Sam Littlefair"
     };
   },
   components: {

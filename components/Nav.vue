@@ -7,7 +7,7 @@
     </nuxt-link>
     <ul class="menu">
       <li v-for="link in nav.links" v-bind:key="link.label">
-        <a :href="link.href">{{ $prismic.asText(link.label) }}</a>
+        <nuxt-link :to="link.href">{{ $prismic.asText(link.label) }}</nuxt-link>
       </li>
     </ul>
   </nav>
@@ -44,6 +44,8 @@ ul.menu {
   color: lightgrey;
   li {
     margin-right: 20px;
+  }
+  a:not(.nuxt-link-exact-active) {
     &:hover {
       color: grey;
     }
@@ -63,5 +65,14 @@ h2 {
 p.subtitle {
   font-size: 1.2em;
   margin-top: 10px;
+}
+
+ul .nuxt-link-exact-active {
+  color: grey;
+  border: 2px solid grey;
+  border-radius: 4px;
+  cursor: default;
+  margin: -2px -5px -3px -5px;
+  padding: 0px 3px 1px 3px;
 }
 </style>

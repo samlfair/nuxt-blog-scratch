@@ -31,13 +31,17 @@ export default {
   .caption {
     color: white;
     font-weight: bold;
-    opacity: 0%;
+    opacity: 0;
     transition: all 0.2s;
     padding: 30px;
     text-shadow: 0 0 70px rgb(80, 80, 80);
+    &:not(:hover) {
+      transition: all 0.4s;
+    }
   }
   &:hover .caption {
-    opacity: 100%;
+    opacity: 1;
+    transition-delay: none;
   }
 }
 </style>
