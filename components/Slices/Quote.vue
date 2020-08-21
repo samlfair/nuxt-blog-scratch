@@ -1,7 +1,7 @@
 <template>
   <div class="quote">
     <q>
-      {{ $prismic.asText(Slice.primary.quote) }}
+      {{ $prismic.asText(slice.primary.quote) }}
     </q>
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   name: "Quote",
   props: {
-    Slice: Object
+    slice: Object
   }
 };
 </script>

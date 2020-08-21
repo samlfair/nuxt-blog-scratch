@@ -1,6 +1,6 @@
 <template>
   <div class="rich-text">
-    <prismic-rich-text :field="Slice.primary.text" />
+    <prismic-rich-text :field="slice.primary.text" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "RichText",
   props: {
-    Slice: Object
+    slice: Object
   }
 };
 </script>

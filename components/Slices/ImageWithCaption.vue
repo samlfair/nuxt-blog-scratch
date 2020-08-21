@@ -1,10 +1,10 @@
 <template>
   <div
     class="image-with-caption"
-    :style="{ backgroundImage: `url(${Slice.primary.image.url})` }"
+    :style="{ backgroundImage: `url(${slice.primary.image.url})` }"
   >
     <div class="caption">
-      <prismic-rich-text :field="Slice.primary.caption" />
+      <prismic-rich-text :field="slice.primary.caption" />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 export default {
   name: "ImageWithCaption",
   props: {
-    Slice: Object
+    slice: Object
   }
 };
 </script>

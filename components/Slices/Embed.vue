@@ -1,12 +1,12 @@
 <template>
-  <div class="embed" v-html="Slice.primary.embed.html"></div>
+  <div class="embed" v-html="slice.primary.embed.html"></div>
 </template>
 
 <script>
 export default {
   name: "Embed",
   props: {
-    Slice: Object
+    slice: Object
   }
 };
 </script>
