@@ -4,6 +4,10 @@ html {
   box-sizing: border-box;
 }
 
+iframe {
+  max-width: 100%;
+}
+
 *,
 *::before,
 *::after {

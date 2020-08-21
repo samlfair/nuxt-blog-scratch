@@ -36,7 +36,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: [
+    "~/plugins/html-serializer.js",
+    "~/plugins/link-resolver.js",
+    "~/plugins/seo-handler.js"
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components

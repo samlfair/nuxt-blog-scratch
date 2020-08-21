@@ -2,11 +2,11 @@
   <nav class="nav">
     <nuxt-link to="/">
       <h1>
-        {{ $prismic.asText(nav.site_title) }}
+        {{ $prismic.asText(nav_title) }}
       </h1>
     </nuxt-link>
     <ul class="menu">
-      <li v-for="link in nav.links" v-bind:key="link.label">
+      <li v-for="link in nav_links" v-bind:key="link.label">
         <nuxt-link :class="link.label" :to="link.href">{{
           $prismic.asText(link.label)
         }}</nuxt-link>
@@ -20,15 +20,9 @@ import LinkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "Nav",
-  data: function() {
-    return {
-      nav: null
-    };
-  },
-  async fetch() {
-    const navContent = (await this.$prismic.api.getSingle("nav")).data;
-    navContent.links.forEach(item => (item.href = LinkResolver(item.link)));
-    this.nav = navContent;
+  props: {
+    nav_links: Array,
+    nav_title: Array
   }
 };
 </script>
@@ -43,13 +37,17 @@ ul.menu {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-  color: lightgrey;
+  color: #d3d3d3;
   li {
+    animation: 4s 2s both fadein;
     margin-right: 20px;
+    a {
+      animation: 4s 2s colorfade;
+    }
   }
   a:not(.nuxt-link-exact-active) {
     &:hover {
-      color: grey;
+      color: #a0a0a0;
     }
   }
 }
@@ -60,6 +58,20 @@ ul.menu {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes colorfade {
+  0% {
+    border-color: white;
+    color: lightgrey;
+  }
+  40% {
+    border-color: white;
+  }
+  100% {
+    border-color: grey;
+    color: lightgrey;
   }
 }
 
@@ -74,8 +86,10 @@ p.subtitle {
 }
 
 ul .nuxt-link-exact-active {
-  color: grey;
-  border: 2px solid grey;
+  color: #a0a0a0;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #a0a0a0;
   border-radius: 4px;
   cursor: default;
   margin: -2px -5px -3px -5px;
