@@ -39,10 +39,10 @@ ul.menu {
   margin-top: 20px;
   color: #d3d3d3;
   li {
-    animation: 4s 2s both fadein;
+    animation: 3s 1s both fadein;
     margin-right: 20px;
     a {
-      animation: 4s 2s colorfade;
+      animation: 5s 1s colorfade, 3s 1s fontcolor;
     }
   }
   a:not(.nuxt-link-exact-active) {
@@ -61,17 +61,24 @@ ul.menu {
   }
 }
 
+@keyframes fontcolor {
+  0% {
+    color: lightgrey;
+  }
+  100% {
+    color: lightgrey;
+  }
+}
+
 @keyframes colorfade {
   0% {
     border-color: white;
-    color: lightgrey;
   }
   40% {
     border-color: white;
   }
   100% {
     border-color: #a0a0a0;
-    color: lightgrey;
   }
 }
 

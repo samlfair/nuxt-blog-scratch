@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "RichText",
+  name: "Text",
   props: {
     slice: Object
   }
