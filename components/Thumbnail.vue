@@ -1,13 +1,15 @@
 <template>
-  <article class="thumbnail">
+  <article :class="{ featured: isFeatured }" class="thumbnail">
     <div class="thumbnail__data">
       <nuxt-link :to="post.link">
         <h2>
-          {{ $prismic.asText(post.data.title) }}
+          {{
+            $prismic.asText(post.data.title) +
+              (post.data.featured ? " ⭐️" : "")
+          }}
         </h2>
       </nuxt-link>
       {{ $prismic.asText(description) }}
-      <!-- <prismic-rich-text class="description" :field="description" /> -->
     </div>
   </article>
 </template>
@@ -18,7 +20,7 @@ import LinkResolver from "~/plugins/link-resolver.js";
 export default {
   name: "Thumbnail",
   props: {
-    post: Object
+    post: Array
   },
   computed: {
     description: function() {
@@ -31,6 +33,9 @@ export default {
         desc[0].text = desc[0].text.match(regex)[0] + "...";
       }
       return desc;
+    },
+    isFeatured: function() {
+      return this.post.data.featured;
     }
   }
 };

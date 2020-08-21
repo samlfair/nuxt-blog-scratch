@@ -4,7 +4,6 @@
       {{ $prismic.asText(postContent.title) }}
     </h2>
     <div class="post__content">
-      <!-- <SliceZone :SliceZone="postContent.body" /> -->
       <slice-zone type="post" :uid="$route.params.uid" />
     </div>
   </div>
@@ -12,7 +11,6 @@
 
 <script>
 import Nav from "~/components/Nav";
-// import SliceZone from "~/components/SliceZone";
 import SliceZone from "vue-slicezone";
 
 export default {

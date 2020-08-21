@@ -29,6 +29,13 @@ export default {
         )
       ).results;
       blogPosts.forEach(post => (post.link = LinkResolver(post)));
+      for (let i = 0; i < blogPosts.length; i++) {
+        console.log(i);
+        if (blogPosts[i].data.featured) {
+          blogPosts.unshift(blogPosts.splice(i, 1)[0]);
+          i = blogPosts.length;
+        }
+      }
       const homeContent = (await $prismic.api.getByUID("page", "home")).data;
       return { blogPosts, homeContent };
     } catch (e) {
