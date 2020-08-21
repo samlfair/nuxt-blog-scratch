@@ -70,7 +70,7 @@ ul.menu {
     border-color: white;
   }
   100% {
-    border-color: #a0a0a0;
+    border-color: grey;
     color: lightgrey;
   }
 }
