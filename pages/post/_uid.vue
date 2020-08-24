@@ -3,6 +3,12 @@
     <h2>
       {{ $prismic.asText(postContent.title) }}
     </h2>
+    <div class="author">
+      By
+      <nuxt-link :to="'/author/' + postContent.author.uid">
+        {{ $prismic.asText(postContent.author.data.name) }}
+      </nuxt-link>
+    </div>
     <div class="post__content">
       <slice-zone type="post" :uid="$route.params.uid" />
     </div>
@@ -10,19 +16,20 @@
 </template>
 
 <script>
-import Nav from "~/components/Nav";
 import SliceZone from "vue-slicezone";
 
 export default {
   name: "post",
   components: {
-    Nav,
     SliceZone
   },
   async asyncData({ $prismic, params, error }) {
     try {
-      const postContent = (await $prismic.api.getByUID("post", params.uid))
-        .data;
+      const postContent = (
+        await $prismic.api.getByUID("post", params.uid, {
+          fetchLinks: "author.name"
+        })
+      ).data;
       return { postContent };
     } catch (e) {
       error({ statsCode: 404, message: e });
@@ -38,9 +45,15 @@ export default {
 .post {
   h2 {
     font-size: 2.2em;
-    line-height: 2em;
+    line-height: 1.8em;
     font-weight: bold;
   }
   margin: 20px 0 100px 0;
+}
+
+.author {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: grey;
 }
 </style>

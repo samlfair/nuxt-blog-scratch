@@ -2,14 +2,16 @@
   <article :class="{ featured: isFeatured }" class="thumbnail">
     <div class="thumbnail__data">
       <nuxt-link :to="post.link">
-        <h2>
-          {{
-            $prismic.asText(post.data.title) +
-              (post.data.featured ? " ⭐️" : "")
-          }}
-        </h2>
+        <div class="title">
+          <h2>
+            {{ $prismic.asText(post.data.title) }}
+          </h2>
+          <span class="star">
+            {{ post.data.featured ? " ⭐️" : "" }}
+          </span>
+        </div>
       </nuxt-link>
-      {{ $prismic.asText(description) }}
+      {{ description }}
     </div>
   </article>
 </template>
@@ -25,14 +27,17 @@ export default {
   computed: {
     description: function() {
       let desc;
+      let excerpt;
       this.post.data.body.forEach(slice => {
         if (slice.slice_type === "text") desc = slice.primary.text;
       });
-      if (desc[0].text.length > 200) {
+      if (desc) {
         const regex = /^(\S+\s){20}\S+/;
-        desc[0].text = desc[0].text.match(regex)[0] + "...";
+        excerpt = desc[0].text.match(regex)[0] + "...";
+      } else {
+        excerpt = "No excerpt.";
       }
-      return desc;
+      return excerpt;
     },
     isFeatured: function() {
       return this.post.data.featured;
@@ -43,9 +48,6 @@ export default {
 
 <style lang="scss" scoped>
 .thumbnail {
-  &:first-child {
-    // border-top: 1px solid #eee;
-  }
   &__data {
     padding: 20px 0;
     h2 {
@@ -58,6 +60,14 @@ export default {
       line-height: 1.4em;
     }
   }
-  border-bottom: 1px solid #eee;
+  &:not(.featured) {
+    border-top: 1px solid #eee;
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>

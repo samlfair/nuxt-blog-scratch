@@ -62,6 +62,6 @@ p.subtitle {
 }
 
 .postlist {
-  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 </style>

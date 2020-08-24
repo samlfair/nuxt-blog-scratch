@@ -10,13 +10,11 @@
 </template>
 
 <script>
-import Nav from "~/components/Nav";
 import SliceZone from "vue-slicezone";
 
 export default {
   name: "page",
   components: {
-    Nav,
     SliceZone
   },
   async asyncData({ $prismic, params, error }) {

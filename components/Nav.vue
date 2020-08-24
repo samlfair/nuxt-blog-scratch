@@ -42,12 +42,20 @@ ul.menu {
     animation: 3s 1s both fadein;
     margin-right: 20px;
     a {
-      animation: 5s 1s colorfade, 3s 1s fontcolor;
-    }
-  }
-  a:not(.nuxt-link-exact-active) {
-    &:hover {
-      color: #a0a0a0;
+      animation: 5s 1s bordercolor;
+      &:not(.nuxt-link-exact-active):hover {
+        color: #a0a0a0;
+      }
+      &.nuxt-link-exact-active {
+        color: #a0a0a0;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #a0a0a0;
+        border-radius: 4px;
+        cursor: default;
+        margin: -2px -5px -3px -5px;
+        padding: 0px 3px 1px 3px;
+      }
     }
   }
 }
@@ -61,16 +69,7 @@ ul.menu {
   }
 }
 
-@keyframes fontcolor {
-  0% {
-    color: lightgrey;
-  }
-  100% {
-    color: lightgrey;
-  }
-}
-
-@keyframes colorfade {
+@keyframes bordercolor {
   0% {
     border-color: white;
   }
@@ -90,16 +89,5 @@ h1 {
 p.subtitle {
   font-size: 1.2em;
   margin-top: 10px;
-}
-
-ul .nuxt-link-exact-active {
-  color: #a0a0a0;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #a0a0a0;
-  border-radius: 4px;
-  cursor: default;
-  margin: -2px -5px -3px -5px;
-  padding: 0px 3px 1px 3px;
 }
 </style>
