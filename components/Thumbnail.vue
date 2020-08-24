@@ -7,7 +7,7 @@
             {{ $prismic.asText(post.data.title) }}
           </h2>
           <span class="star">
-            {{ post.data.featured ? " ⭐️" : "" }}
+            {{ post.data.featured ? "✱" : "" }}
           </span>
         </div>
       </nuxt-link>
@@ -48,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .thumbnail {
+  overflow: hidden;
   &__data {
     padding: 20px 0;
     h2 {
@@ -69,5 +70,27 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  .star {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    color: grey;
+    &:after {
+      content: "featured";
+      margin-top: 1.5px;
+      margin-left: 3px;
+      display: inline-block;
+      width: 0px;
+      opacity: 0;
+      transition: opacity 0.4s, width 0.4s;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.featured:hover .star:after {
+  opacity: 1;
+  width: 9ch;
 }
 </style>

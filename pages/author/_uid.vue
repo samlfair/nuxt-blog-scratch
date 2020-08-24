@@ -29,7 +29,7 @@ export default {
       const authorPosts = (
         await $prismic.api.query([
           $prismic.predicates.at("document.type", "post"),
-          $prismic.predicates.at("my.post.author", "X0O1OBAAACUADyNU")
+          $prismic.predicates.at("my.post.author", authorContent.id)
         ])
       ).results;
       authorPosts.forEach(post => (post.link = LinkResolver(post)));

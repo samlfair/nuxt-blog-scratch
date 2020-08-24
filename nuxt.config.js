@@ -62,7 +62,8 @@ export default {
   plugins: [
     "~/plugins/html-serializer.js",
     "~/plugins/link-resolver.js",
-    "~/plugins/seo-handler.js"
+    "~/plugins/seo-handler.js",
+    "~/plugins/disqus"
   ],
 
   /*
