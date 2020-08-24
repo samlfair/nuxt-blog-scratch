@@ -1,7 +1,7 @@
 <template>
   <article :class="{ featured: isFeatured }" class="thumbnail">
     <div class="thumbnail__data">
-      <nuxt-link :to="post.link">
+      <nuxt-link :to="link">
         <div class="title">
           <h2>
             {{ $prismic.asText(post.data.title) }}
@@ -22,7 +22,7 @@ import LinkResolver from "~/plugins/link-resolver.js";
 export default {
   name: "Thumbnail",
   props: {
-    post: Array
+    post: Object
   },
   computed: {
     description: function() {
@@ -41,6 +41,9 @@ export default {
     },
     isFeatured: function() {
       return this.post.data.featured;
+    },
+    link: function() {
+      return LinkResolver(this.post);
     }
   }
 };

@@ -1,8 +1,22 @@
 <template>
   <div class="container">
+    <input
+      class="search"
+      type="text"
+      v-model="searchQuery"
+      placeholder="Search..."
+      @keyup="handleSearch"
+    />
     <div class="postlist">
-      <div v-for="post in blogPosts" v-bind:key="post.id">
-        <Thumbnail :post="post"></Thumbnail>
+      <div v-if="!searchQuery" class="standard-feed">
+        <div v-for="post in blogPosts" v-bind:key="post.id">
+          <Thumbnail :post="post"></Thumbnail>
+        </div>
+      </div>
+      <div v-if="searchQuery && searchResults.length" class="search-feed">
+        <div v-for="post in searchResults" v-bind:key="post.id">
+          <Thumbnail :post="post"></Thumbnail>
+        </div>
       </div>
     </div>
   </div>
@@ -20,6 +34,12 @@ export default {
   components: {
     Thumbnail
   },
+  data: function() {
+    return {
+      searchResults: [],
+      searchQuery: ""
+    };
+  },
   async asyncData({ $prismic, error }) {
     try {
       const blogPosts = (
@@ -28,7 +48,6 @@ export default {
           { orderings: "[my.post.date desc]" }
         )
       ).results;
-      blogPosts.forEach(post => (post.link = LinkResolver(post)));
       for (let i = 0; i < blogPosts.length; i++) {
         console.log(i);
         if (blogPosts[i].data.featured) {
@@ -40,6 +59,15 @@ export default {
       return { blogPosts, homeContent };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
+    }
+  },
+  methods: {
+    async handleSearch(e) {
+      const res = await this.$prismic.api.query([
+        this.$prismic.predicates.at("document.type", "post"),
+        this.$prismic.predicates.fulltext("document", e.target.value)
+      ]);
+      this.searchResults = res.results;
     }
   }
 };
@@ -61,7 +89,16 @@ p.subtitle {
   margin-top: 10px;
 }
 
-.postlist {
+.standard-feed,
+.search-feed {
   border-bottom: 1px solid #eee;
+}
+
+.search {
+  margin-bottom: 30px;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
 }
 </style>

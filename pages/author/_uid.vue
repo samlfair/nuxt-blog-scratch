@@ -32,7 +32,6 @@ export default {
           $prismic.predicates.at("my.post.author", authorContent.id)
         ])
       ).results;
-      authorPosts.forEach(post => (post.link = LinkResolver(post)));
       authorContent = authorContent.data;
       return { authorContent, authorPosts };
     } catch (e) {
