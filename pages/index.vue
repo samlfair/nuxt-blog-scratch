@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import LinkResolver from "~/plugins/link-resolver.js";
 import Thumbnail from "~/components/Thumbnail";
 
 export default {
@@ -49,7 +48,6 @@ export default {
         )
       ).results;
       for (let i = 0; i < blogPosts.length; i++) {
-        console.log(i);
         if (blogPosts[i].data.featured) {
           blogPosts.unshift(blogPosts.splice(i, 1)[0]);
           i = blogPosts.length;

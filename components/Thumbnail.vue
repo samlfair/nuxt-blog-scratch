@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import LinkResolver from "~/plugins/link-resolver.js";
+import linkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "Thumbnail",
@@ -43,7 +43,7 @@ export default {
       return this.post.data.featured;
     },
     link: function() {
-      return LinkResolver(this.post);
+      return linkResolver(this.post);
     }
   }
 };

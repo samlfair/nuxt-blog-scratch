@@ -7,17 +7,15 @@
     </nuxt-link>
     <ul class="menu">
       <li v-for="link in nav_links" v-bind:key="link.label">
-        <nuxt-link :class="link.label" :to="link.href">{{
-          $prismic.asText(link.label)
-        }}</nuxt-link>
+        <prismic-link :field="link.link">
+          {{ $prismic.asText(link.label) }}
+        </prismic-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import LinkResolver from "~/plugins/link-resolver.js";
-
 export default {
   name: "Nav",
   props: {

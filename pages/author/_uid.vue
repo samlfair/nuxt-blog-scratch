@@ -18,7 +18,6 @@
 <script>
 import SliceZone from "vue-slicezone";
 import Thumbnail from "~/components/Thumbnail";
-import LinkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "author",

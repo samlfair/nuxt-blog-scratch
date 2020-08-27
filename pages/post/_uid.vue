@@ -24,8 +24,8 @@
 
 <script>
 import SliceZone from "vue-slicezone";
-import linkResolver from "~/plugins/link-resolver";
 import { Disqus } from "vue-disqus";
+import linkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "post",
@@ -40,7 +40,6 @@ export default {
           fetchLinks: "author.name"
         })
       ).data;
-      console.log(postContent.allow_comments);
       return { postContent };
     } catch (e) {
       error({ statsCode: 404, message: e });

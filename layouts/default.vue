@@ -14,7 +14,7 @@
 
 <script>
 import Nav from "~/components/Nav";
-import LinkResolver from "~/plugins/link-resolver.js";
+import linkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "default",
@@ -29,7 +29,7 @@ export default {
   async fetch() {
     const config = (await this.$prismic.api.getSingle("config")).data;
     config.nav_links.forEach(link => {
-      link.href = LinkResolver(link.link);
+      link.href = linkResolver(link.link);
     });
     this.config = config;
   },
