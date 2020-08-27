@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import linkResolver from "~/plugins/link-resolver.js";
-
 export default {
   name: "Thumbnail",
   props: {
@@ -43,7 +41,7 @@ export default {
       return this.post.data.featured;
     },
     link: function() {
-      return linkResolver(this.post);
+      return this.$prismic.linkResolver(this.post);
     }
   }
 };

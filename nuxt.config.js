@@ -59,12 +59,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    "~/plugins/html-serializer.js",
-    "~/plugins/link-resolver.js",
-    "~/plugins/seo-handler.js",
-    "~/plugins/disqus"
-  ],
+  plugins: ["~/plugins/seo-handler.js"],
 
   /*
    ** Auto import components
@@ -86,7 +81,7 @@ export default {
     [
       "@nuxtjs/prismic",
       {
-        endpoint: "",
+        endpoint: "https://sam-onboarding-nuxt-blog.cdn.prismic.io/api/v2",
         apiOptions: {
           routes: [
             {

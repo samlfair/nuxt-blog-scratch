@@ -2,7 +2,7 @@
  * To learn more about Link Resolving check out the Prismic documentation
  */
 
-linkResolver = doc => {
+export default doc => {
   if (doc.link_type === "Web") {
     return doc.url;
   }

@@ -12,26 +12,16 @@
     <div class="post__content">
       <slice-zone type="post" :uid="$route.params.uid" />
     </div>
-    <Disqus
-      v-if="postContent.allow_comments"
-      shortname="sam-onboarding-nuxt-blog"
-      :identifier="'sam-nuxt' + $route.params.uid"
-      :url="'http://localhost:3000' + $route.fullPath"
-    >
-    </Disqus>
   </div>
 </template>
 
 <script>
 import SliceZone from "vue-slicezone";
-import { Disqus } from "vue-disqus";
-import linkResolver from "~/plugins/link-resolver.js";
 
 export default {
   name: "post",
   components: {
-    SliceZone,
-    Disqus
+    SliceZone
   },
   async asyncData({ $prismic, params, error }) {
     try {
@@ -50,7 +40,7 @@ export default {
   },
   computed: {
     authorLink: function() {
-      return linkResolver(this.postContent.author);
+      return this.$prismic.linkResolver(this.postContent.author);
     }
   }
 };
