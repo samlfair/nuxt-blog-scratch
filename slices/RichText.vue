@@ -21,14 +21,17 @@ export default {
     p + p {
       margin-top: $paragraph-break;
     }
-    ul {
+    ul,
+    ol {
       margin-left: 24px;
       margin: $soft-break 0 $soft-break 24px;
       li + li {
         margin-top: $soft-break;
       }
     }
-    a {
+    ul a,
+    ol a,
+    p a {
       box-shadow: 0px -1px 0px 0px inset white, 0px -3px 0px 0px inset #c9c9c9;
       text-shadow: 1px 1px white, 1px -1px white, -1px 1px white,
         -1px -1px white;
