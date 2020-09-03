@@ -30,6 +30,11 @@ nav {
   padding: 50px 0 30px 0;
 }
 
+h1 {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+}
+
 ul.menu {
   list-style: none;
   display: flex;
@@ -46,9 +51,7 @@ ul.menu {
       }
       &.nuxt-link-exact-active {
         color: #a0a0a0;
-        border-width: 2px;
-        border-style: solid;
-        border-color: #a0a0a0;
+        border: 2px solid #a0a0a0;
         border-radius: 4px;
         cursor: default;
         margin: -2px -5px -3px -5px;
@@ -59,10 +62,10 @@ ul.menu {
 }
 
 @keyframes fadein {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }
@@ -77,15 +80,5 @@ ul.menu {
   100% {
     border-color: #a0a0a0;
   }
-}
-
-h1 {
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
-}
-
-p.subtitle {
-  font-size: 1.2em;
-  margin-top: 10px;
 }
 </style>

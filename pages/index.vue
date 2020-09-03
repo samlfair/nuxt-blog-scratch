@@ -1,20 +1,8 @@
 <template>
   <div class="container">
-    <input
-      class="search"
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search..."
-      @keyup="handleSearch"
-    />
     <div class="postlist">
-      <div v-if="!searchQuery" class="standard-feed">
+      <div class="standard-feed">
         <div v-for="post in blogPosts" v-bind:key="post.id">
-          <Thumbnail :post="post"></Thumbnail>
-        </div>
-      </div>
-      <div v-if="searchQuery && searchResults.length" class="search-feed">
-        <div v-for="post in searchResults" v-bind:key="post.id">
           <Thumbnail :post="post"></Thumbnail>
         </div>
       </div>
@@ -53,26 +41,10 @@ export default {
           i = blogPosts.length;
         }
       }
-      const fetchr = await $prismic.api.query(
-        $prismic.predicates.at("document.type", "post"),
-        {
-          fetchLinks: ["author.name"]
-        }
-      );
-      console.log(fetchr.results[0].data);
       const homeContent = (await $prismic.api.getByUID("page", "home")).data;
       return { blogPosts, homeContent };
     } catch (e) {
       error({ statsCode: 404, message: "Page not found" });
-    }
-  },
-  methods: {
-    async handleSearch(e) {
-      const res = await this.$prismic.api.query([
-        this.$prismic.predicates.at("document.type", "post"),
-        this.$prismic.predicates.fulltext("document", e.target.value)
-      ]);
-      this.searchResults = res.results;
     }
   }
 };
@@ -84,26 +56,7 @@ h1 {
   font-weight: 600;
 }
 
-h2 {
-  font-family: "Lora", serif;
-  font-weight: 400;
-}
-
-p.subtitle {
-  font-size: 1.2em;
-  margin-top: 10px;
-}
-
-.standard-feed,
-.search-feed {
+.standard-feed {
   border-bottom: 1px solid #eee;
-}
-
-.search {
-  margin-bottom: 30px;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
 }
 </style>

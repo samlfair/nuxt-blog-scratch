@@ -10,9 +10,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.rich-text {
-  border: 1px solid black;
-}
-</style>

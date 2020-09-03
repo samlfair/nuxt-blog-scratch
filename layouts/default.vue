@@ -4,9 +4,7 @@
     <div class="col-middle">
       <Nav :nav_title="config.nav_title" :nav_links="config.nav_links" />
       <Nuxt />
-      <div class="footer">
-        <prismic-rich-text :field="config.footer" />
-      </div>
+      <prismic-rich-text class="footer" :field="config.footer" />
     </div>
     <div class="col-right"></div>
   </div>
@@ -94,7 +92,7 @@ export default {
       margin-top: 20vh;
       margin-bottom: 10vh;
       font-family: "Source Sans Pro";
-      color: lightgrey;
+      color: $dimgrey;
       text-align: center;
     }
   }

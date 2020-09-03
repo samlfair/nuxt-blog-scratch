@@ -92,8 +92,12 @@ export default {
         }
       }
     ],
-    ["nuxt-sm"]
+    ["nuxt-sm"],
+    "@nuxtjs/style-resources"
   ],
+  styleResources: {
+    scss: ["./assets/vars.scss"]
+  },
   prismic: {
     endpoint: "https://sam-onboarding-nuxt-blog.cdn.prismic.io/api/v2",
     linkResolver: "@/plugins/link-resolver",

@@ -1,18 +1,16 @@
 <template>
   <article :class="{ featured: isFeatured }" class="thumbnail">
-    <div class="thumbnail__data">
-      <nuxt-link :to="link">
-        <div class="title">
-          <h2>
-            {{ $prismic.asText(post.data.title) }}
-          </h2>
-          <span class="star">
-            {{ post.data.featured ? "✱" : "" }}
-          </span>
-        </div>
-      </nuxt-link>
+    <nuxt-link :to="link">
+      <div class="title">
+        <h2>
+          {{ $prismic.asText(post.data.title) }}
+        </h2>
+        <span v-if="post.data.featured" class="star">✱</span>
+      </div>
+    </nuxt-link>
+    <p>
       {{ description }}
-    </div>
+    </p>
   </article>
 </template>
 
@@ -22,16 +20,22 @@ export default {
   props: {
     post: Object
   },
+  data() {
+    return {
+      numberOfWords: 25
+    };
+  },
   computed: {
     description: function() {
-      let desc;
-      let excerpt;
+      let desc, excerpt;
       this.post.data.body.forEach(slice => {
-        if (slice.slice_type === "text") desc = slice.primary.text;
+        if (slice.slice_type === "rich_text") desc = slice.primary.text;
       });
       if (desc) {
-        const regex = /^(\S+\s){20}\S+/;
-        excerpt = desc[0].text.match(regex)[0] + "...";
+        const regexConstructor =
+          "^(\\S+\\s){" + this.numberOfWords + "}\\S*[^,\\.:;\\s]";
+        const regex = new RegExp(regexConstructor);
+        excerpt = desc[0].text.match(regex)[0] + " ...";
       } else {
         excerpt = "No excerpt.";
       }
@@ -50,20 +54,15 @@ export default {
 <style lang="scss" scoped>
 .thumbnail {
   overflow: hidden;
-  &__data {
-    padding: 20px 0;
-    h2 {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .description {
-      font-size: 1.1em;
-      line-height: 1.4em;
-    }
+  border-top: 1px solid $lightgrey;
+  padding: 20px 0;
+  h2 {
+    // font-size: 1.2em;
+    // font-weight: bold;
+    margin-bottom: 10px;
   }
-  &:not(.featured) {
-    border-top: 1px solid #eee;
+  p {
+    line-height: $p-height;
   }
 }
 
@@ -75,7 +74,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: top;
-    color: grey;
+    color: $grey;
     &:after {
       content: "featured";
       margin-top: 1.5px;
