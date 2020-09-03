@@ -26,11 +26,15 @@ export default {
     Nav
   },
   async fetch() {
-    const config = (await this.$prismic.api.getSingle("config")).data;
-    config.nav_links.forEach(link => {
-      link.href = this.$prismic.linkResolver(link.link);
-    });
-    this.config = config;
+    try {
+      const config = (await this.$prismic.api.getSingle("config")).data;
+      config.nav_links.forEach(link => {
+        link.href = this.$prismic.linkResolver(link.link);
+      });
+      this.config = config;
+    } catch {
+      this.$nuxt.error({ statusCode: 404, message: "Data not found" });
+    }
   },
   head() {
     return {

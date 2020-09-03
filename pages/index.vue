@@ -53,6 +53,13 @@ export default {
           i = blogPosts.length;
         }
       }
+      const fetchr = await $prismic.api.query(
+        $prismic.predicates.at("document.type", "post"),
+        {
+          fetchLinks: ["author.name"]
+        }
+      );
+      console.log(fetchr.results[0].data);
       const homeContent = (await $prismic.api.getByUID("page", "home")).data;
       return { blogPosts, homeContent };
     } catch (e) {
