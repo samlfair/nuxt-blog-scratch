@@ -26,6 +26,7 @@ export default {
   flex-direction: row;
   color: $grey;
   line-height: 1.6em;
+  margin-bottom: 20px;
 
   .icon {
     margin: 2px 15px 0px 2px;
