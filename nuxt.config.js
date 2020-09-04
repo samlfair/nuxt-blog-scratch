@@ -77,7 +77,7 @@ export default {
    */
   modules: [
     // modules for full static before `nuxt export` (coming in v2.12)
-    "@nuxtjs/prismic",
+    // "@nuxtjs/prismic",
     [
       "@nuxtjs/prismic",
       {
